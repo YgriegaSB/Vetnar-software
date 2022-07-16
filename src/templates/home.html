@@ -1,0 +1,65 @@
+<!-- Se extiende de base.html -->
+{% extends './base.html' %}
+<!-- Titulo login -->
+{% block title %} Home {% endblock %}
+<!-- Css login -->
+{% block customCSS %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+{% endblock %}
+
+{% block body %} 
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="home">
+    <img src="../static/img/vetnar.png" alt="" width="30" height="30" "> Vetnar
+  </a>
+  <div class="container">
+    <div class="navbar-nav">
+      <h6>Bienvenido: {{ current_user.username }}</h6>
+    </div>
+    <div class="navbar-nav">
+      <div class="nav-item text-nowrap">
+        <a class="nav-link px-3" href="{{ url_for('logout')}}">Cerrar Sesión</a>
+      </div>
+    </div>
+  </div>
+</header>
+<main>
+  <section>
+    <div class="container-fluid">
+      <div class="row">
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+          <div class="position-sticky pt-3">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="home">
+                  <span class="align-text-bottom"></span>
+                  Home
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="clientes">
+                  <span class="align-text-bottom"></span>
+                  Clientes
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="mascotas">
+                  <span class="align-text-bottom"></span>
+                  Mascotas
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="reservas">
+                  <span class="align-text-bottom"></span>
+                  Reservas
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </section>
+  {% block content %} {% endblock %}
+</main>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends './home.html' %}
+
+{% block customCSS %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/clientes.css') }}">
+{% endblock %}
+
+{% block title %} Cliente | Listado {% endblock %}
+
+{% block content %}
+<section class="content">
+    <div>
+        <div class="nav-scroller bg-body shadow-sm col-sm">
+            <nav class="nav" aria-label="Secondary navigation">
+                <a class="nav-link active" href="clientes_add">Nuevo cliente</a>
+                <a class="nav-link" href="clientes_mod">Gestión</a>
+            </nav>
+        </div>
+    </div>
+    <form action="" method="post">
+        <div class="add">
+            <span class="input-group-sm mb-3">Información del cliente</span>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Nombre</span>
+                <input type="text" class="form-control">
+                <span class="input-group-text">Apellido P.</span>
+                <input type="text" class="form-control">
+                <span class="input-group-text">Apellido M.</span>
+                <input type="text" class="form-control">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <input type="date" class="form-control">
+                <span class="input-group-text">Rut</span>
+                <input type="text" class="form-control">
+                <span class="input-group-text">Fecha de nacimiento</span>
+            </div>
+            <hr>
+            <span class="input-group-sm mb-3">Información del contacto</span>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Teléfono casa</span>
+                <input type="text" class="form-control">
+                <span class="input-group-text">Teléfono móvil</span>
+                <input type="text" class="form-control">
+                <span class="input-group-text">Teléfono trabajo</span>
+                <input type="text" class="form-control">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Correo electrónico</span>
+                <input type="text" class="form-control">
+                <span class="input-group-text">Facebook</span>
+                <input type="text" class="form-control">
+                <span class="input-group-text">Cliente externo (Derivado)</span>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected></option>
+                    <option value="1">Si</option>
+                    <option value="2">No</option>
+                </select>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Vía</span>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected>Seleccione vía</option>
+                    <option value="1">Avenida</option>
+                    <option value="2">Calle</option>
+                    <option value="2">Psje.</option>
+                </select>
+                <span class="input-group-text">Dirección</span>
+                <input type="text" class="form-control">
+                <span class="input-group-text">Distrito</span>
+                <input type="text" class="form-control">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Referencias</span>
+                <textarea class="form-control"></textarea>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Notas</span>
+                <textarea class="form-control"></textarea>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <button type="button" class="btn btn-secondary btn-sm">Cancelar</button>
+                <button type="button" class="btn btn-primary btn-sm">Guardar cambios</button>
+            </div>
+        </div>
+    </form>
+</section>
+{% endblock %}
