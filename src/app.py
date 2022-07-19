@@ -66,7 +66,7 @@ def home():
 @login_required
 def clientes():
     cursor = db.connection.cursor()
-    cursor.execute('SELECT * FROM clientes')
+    cursor.execute('SELECT nombre_cl, rut_cl, telefono_movil, correo_cl, direccion_cl FROM clientes')
     data = cursor.fetchall()
     print (data)
     return render_template('auth/clientes_list.html', clientes = data)

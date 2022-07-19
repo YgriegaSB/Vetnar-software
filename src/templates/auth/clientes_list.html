@@ -16,10 +16,35 @@
         <a class="nav-link" href="clientes_add">Nuevo cliente</a>
         <a class="nav-link" href="#">Gestión</a>
      </nav>
-    </div>
-    <form action="">
-      
-    </form>
+    </div>  
   </div>
+</section>
+<!-- Recibo datos [nombre_cl, rut_cl, telefono_movil, correo_cl, direccion_cl] -->
+<section class="conntent">
+  <table class="table">
+    <thead>
+    <tr>
+        <td>Nombre</td>
+        <td>Rut</td>
+        <td>Telefono Movil</td>
+        <td>Correo</td>
+        <td>Dirección</td>
+    </tr>
+    </thead>
+    <tbody>
+        {% for clientes in clientes %}
+        <tr>
+            <td>{{ clientes.0 }}</td>
+            <td>{{ clientes.1 }}</td>
+            <td>{{ clientes.2 }}</td>
+            <td>{{ clientes.3 }}</td>
+            <td>{{ clientes.4 }}</td>
+            <td>
+                <a href="/edit/{{clientes.0}}">Edit</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+  </table>
 </section>
 {% endblock %}
