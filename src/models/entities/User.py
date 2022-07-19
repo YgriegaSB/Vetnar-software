@@ -5,10 +5,11 @@ from flask_login import UserMixin
 
 # Clase con metodo __init__ que funciona como reflejo de la bd, recibiendo los datos
 class User(UserMixin):
-    def __init__(self, id, username,  password) -> None:
+    def __init__(self, id, username,  password, fullname="") -> None:
         self.id = id
         self.username = username
         self.password = password
+        self.fullname = fullname
 
     # Metodo para recibir passwd hasheado y passwd
     # Metodo sin necesidad de instanciar clase (@classmethod)

@@ -14,7 +14,7 @@
   </a>
   <div class="container">
     <div class="navbar-nav">
-      <h6>Bienvenido: {{ current_user.username }}</h6>
+      <h6>Bienvenido: {{ current_user.fullname }}</h6>
     </div>
     <div class="navbar-nav">
       <div class="nav-item text-nowrap">
@@ -52,6 +52,12 @@
                 <a class="nav-link" href="reservas">
                   <span class="align-text-bottom"></span>
                   Reservas
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="calendario">
+                  <span class="align-text-bottom"></span>
+                  Calendario
                 </a>
               </li>
             </ul>

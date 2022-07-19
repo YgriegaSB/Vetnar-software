@@ -12,74 +12,65 @@
     <div>
         <div class="nav-scroller bg-body shadow-sm col-sm">
             <nav class="nav" aria-label="Secondary navigation">
+                <a class="nav-link" href="clientes">Listar</a>
                 <a class="nav-link active" href="clientes_add">Nuevo cliente</a>
-                <a class="nav-link" href="clientes_mod">Gestión</a>
+                <a class="nav-link" href="#">Gestión</a>
             </nav>
         </div>
     </div>
-    <form action="" method="post">
+    <form action="/create_cl" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/> 
         <div class="add">
             <span class="input-group-text">Información del cliente</span>
             <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text">Nombre</span>
-                <input type="text" class="form-control">
-                <span class="input-group-text">Apellido P.</span>
-                <input type="text" class="form-control">
-                <span class="input-group-text">Apellido M.</span>
-                <input type="text" class="form-control">
+                <span class="input-group-text">Nombre, apellidoP, apellidoM</span>
+                <input type="text" class="form-control" name="nombre_cl">
             </div>
             <div class="input-group input-group-sm mb-3">
                 <span class="input-group-text">Rut</span>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="rut_cl">
                 <span class="input-group-text">Cumpleaños</span>
-                <input type="date" class="form-control">
+                <input type="date" class="form-control" name="cumpleaños_cl">
+                <span class="input-group-text">Fecha registro</span>
+                <input type="date" class="form-control" name="registro_cl">
             </div>
             <hr>
             <span class="input-group-text">Información del contacto</span>
             <div class="input-group input-group-sm mb-3">
                 <span class="input-group-text">Teléfono casa</span>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="telefonoC">
                 <span class="input-group-text">Teléfono móvil</span>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="telefonoM">
                 <span class="input-group-text">Teléfono trabajo</span>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="telefonoT">
             </div>
             <div class="input-group input-group-sm mb-3">
                 <span class="input-group-text">Correo electrónico</span>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="correo_cl">
                 <span class="input-group-text">Facebook</span>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="facebook_cl">
                 <span class="input-group-text">Cliente externo (Derivado)</span>
-                <select class="form-select" aria-label="Default select example">
+                <select class="form-select" aria-label="Default select example" name="derivado">
                     <option selected></option>
-                    <option value="1">Si</option>
-                    <option value="2">No</option>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
                 </select>
             </div>
             <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text">Vía</span>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected>Seleccione vía</option>
-                    <option value="1">Avenida</option>
-                    <option value="2">Calle</option>
-                    <option value="2">Psje.</option>
-                </select>
                 <span class="input-group-text">Dirección</span>
-                <input type="text" class="form-control">
-                <span class="input-group-text">Distrito</span>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" name="direccion_cl">
             </div>
             <div class="input-group input-group-sm mb-3">
                 <span class="input-group-text">Referencias</span>
-                <textarea class="form-control"></textarea>
+                <textarea class="form-control" name="referencias"></textarea>
             </div>
             <div class="input-group input-group-sm mb-3">
                 <span class="input-group-text">Notas</span>
-                <textarea class="form-control"></textarea>
+                <textarea class="form-control" name="notas"></textarea>
             </div>
             <div class="input-group input-group-sm mb-3">
                 <a href="clientes" class="btn btn-danger btn-sm">Cancelar</a>
-                <button type="button" class="btn btn-primary btn-sm">Guardar cambios</button>
+                <button type="submit" class="btn btn-primary btn-sm">Guardar cambios</button>
             </div>
         </div>
     </form>

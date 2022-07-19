@@ -1,0 +1,80 @@
+{% extends './home.html' %}
+
+{% block customCSS %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/clientes.css') }}">
+{% endblock %}
+
+{% block title %} Clientes | Editar {% endblock %}
+
+{% block content %}
+<section class="content">
+  <div>
+    <div class="nav-scroller bg-body shadow-sm col-sm">
+      <nav class="nav" aria-label="Secondary navigation">
+        <a class="nav-link" href="clientes">Regresar</a>
+        <a class="nav-link" href="clientes_info">Perfil</a>
+        <a class="nav-link active" href="clientes_edit">Editar</a>
+        <a class="nav-link" href="clientes_mascotas">Mascotas</a>
+      </nav>
+    </div>
+    <form action="/edit_cl" method="POST">
+      <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/> 
+      <div class="add">
+          <span class="input-group-text">Información del cliente</span>
+          <div class="input-group input-group-sm mb-3">
+              <span class="input-group-text">Nombre, apellidoP, apellidoM</span>
+              <input type="text" class="form-control" name="nombre_cl">
+          </div>
+          <div class="input-group input-group-sm mb-3">
+              <span class="input-group-text">Rut</span>
+              <input type="text" class="form-control" name="rut_cl">
+              <span class="input-group-text">Cumpleaños</span>
+              <input type="date" class="form-control" name="cumpleaños_cl">
+              <span class="input-group-text">Fecha registro</span>
+              <input type="date" class="form-control" name="registro_cl">
+          </div>
+          <hr>
+          <span class="input-group-text">Información del contacto</span>
+          <div class="input-group input-group-sm mb-3">
+              <span class="input-group-text">Teléfono casa</span>
+              <input type="text" class="form-control" name="telefonoC">
+              <span class="input-group-text">Teléfono móvil</span>
+              <input type="text" class="form-control" name="telefonoM">
+              <span class="input-group-text">Teléfono trabajo</span>
+              <input type="text" class="form-control" name="telefonoT">
+          </div>
+          <div class="input-group input-group-sm mb-3">
+              <span class="input-group-text">Correo electrónico</span>
+              <input type="text" class="form-control" name="correo_cl">
+              <span class="input-group-text">Facebook</span>
+              <input type="text" class="form-control" name="facebook_cl">
+              <span class="input-group-text">Cliente externo (Derivado)</span>
+              <select class="form-select" aria-label="Default select example" name="derivado">
+                  <option selected></option>
+                  <option value="Si">Si</option>
+                  <option value="No">No</option>
+              </select>
+          </div>
+          <div class="input-group input-group-sm mb-3">
+              <span class="input-group-text">Dirección</span>
+              <input type="text" class="form-control" name="direccion_cl">
+          </div>
+          <div class="input-group input-group-sm mb-3">
+              <span class="input-group-text">Referencias</span>
+              <textarea class="form-control" name="referencias"></textarea>
+          </div>
+          <div class="input-group input-group-sm mb-3">
+              <span class="input-group-text">Notas</span>
+              <textarea class="form-control" name="notas"></textarea>
+          </div>
+          <div class="input-group input-group-sm mb-3">
+              <a href="clientes" class="btn btn-danger btn-sm">Cancelar</a>
+              <button type="submit" class="btn btn-primary btn-sm">Guardar cambios</button>
+          </div>
+      </div>
+    </form>
+  </div>
+
+</section>
+{% endblock %}

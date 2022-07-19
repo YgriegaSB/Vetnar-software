@@ -11,7 +11,7 @@ class ModelUser():
             # Cursor para interactuar con la bd
             cursor = db.connection.cursor()
             # Comprobación de clave existente
-            sql = "SELECT id, username, password FROM user WHERE username = '{}'".format(user.username)
+            sql = "SELECT id, username, password, fullname FROM user WHERE username = '{}'".format(user.username)
             # Ejecutamos sql sentence
             cursor.execute(sql)
             # fila resultante
@@ -19,7 +19,7 @@ class ModelUser():
             # Si existe usuario o no
             if row != None:
                 # Verifico datos en bd y compruebo mediante la funcion check_password
-                user = User(row[0], row[1], User.check_password(row[2], user.password)) 
+                user = User(row[0], row[1], User.check_password(row[2], user.password), row[3]) 
                 return user
             else:
                 return None
@@ -34,7 +34,7 @@ class ModelUser():
             # Cursor para interactuar con la bd
             cursor = db.connection.cursor()
             # Comprobación de id existente
-            sql = "SELECT id, username FROM user WHERE id = '{}'".format(id)
+            sql = "SELECT id, username, fullname FROM user WHERE id = '{}'".format(id)
             # Ejecutamos sql sentence
             cursor.execute(sql)
             # fila resultante
@@ -42,7 +42,7 @@ class ModelUser():
             # Si existe usuario o no
             if row != None:
                 # Verifico datos en bd y compruebo 
-                return User(row[0], row[1], None) 
+                return User(row[0], row[1], None, row[2]) 
             else:
                 return None
         except Exception as ex:

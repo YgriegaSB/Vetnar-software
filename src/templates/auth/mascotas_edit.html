@@ -5,17 +5,17 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/clientes.css') }}">
 {% endblock %}
 
-{% block title %} Mascotas | Nuevo {% endblock %}
+{% block title %} Mascotas | Perfil {% endblock %}
 
 {% block content %}
 <section class="content">
     <div>
         <div class="nav-scroller bg-body shadow-sm col-sm">
             <nav class="nav" aria-label="Secondary navigation">
-                <a class="nav-link active" href="mascotas">Listar</a>
-                <a class="nav-link" href="mascotas_add">Nueva mascota</a>
-                <a class="nav-link" href="mascotas_razas">Razas</a>
-                <a class="nav-link" href="#">Gestión</a>
+                <a class="nav-link" href="mascotas">Regresar</a>
+                <a class="nav-link" href="mascotas_info">Perfil</a>
+                <a class="nav-link active" href="mascotas_edit">Editar</a>
+                <a class="nav-link" href="mascotas_history">Historial clinico</a>
             </nav>
         </div>
     </div>
