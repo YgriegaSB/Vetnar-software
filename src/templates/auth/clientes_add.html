@@ -8,21 +8,30 @@
 {% block title %} Cliente | Nuevo {% endblock %}
 
 {% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for messages in messages %}
+<div class="alert alert-success alert-dismissible" role="alert">
+    <strong>{{messages}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
 <section class="content">
     <div>
         <div class="nav-scroller bg-body shadow-sm col-sm">
             <nav class="nav" aria-label="Secondary navigation">
                 <a class="nav-link" href="clientes">Listar</a>
                 <a class="nav-link active" href="clientes_add">Nuevo cliente</a>
-                <a class="nav-link" href="#">Gestión</a>
             </nav>
         </div>
     </div>
     <form action="/create_cl" method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/> 
         <div class="add">
-            <span class="input-group-text">Información del cliente</span>
-            <div class="input-group input-group-sm mb-3">
+            <span class="fs-4">Información del cliente</span>
+            <div class="input-group input-group-sm mb-3 mt-3">
                 <span class="input-group-text">Nombre, apellidoP, apellidoM</span>
                 <input type="text" class="form-control" name="nombre_cl">
             </div>
@@ -35,7 +44,7 @@
                 <input type="date" class="form-control" name="registro_cl">
             </div>
             <hr>
-            <span class="input-group-text">Información del contacto</span>
+            <span class="fs-4">Información del contacto</span>
             <div class="input-group input-group-sm mb-3">
                 <span class="input-group-text">Teléfono casa</span>
                 <input type="text" class="form-control" name="telefonoC">
@@ -69,8 +78,8 @@
                 <textarea class="form-control" name="notas"></textarea>
             </div>
             <div class="input-group input-group-sm mb-3">
-                <a href="clientes" class="btn btn-danger btn-sm">Cancelar</a>
-                <button type="submit" class="btn btn-primary btn-sm">Guardar cambios</button>
+                <a href="clientes" class="btn btn-danger btn-sm w-50">Cancelar</a>
+                <button type="submit" class="btn btn-primary btn-sm w-50">Guardar cambios</button>
             </div>
         </div>
     </form>

@@ -1,0 +1,55 @@
+{% extends './home.html' %}
+
+{% block customCSS %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/clientes.css') }}">
+{% endblock %}
+
+{% block title %} Profesionales | Nuevo {% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for messages in messages %}
+<div class="alert alert-success alert-dismissible" role="alert">
+    <strong>{{messages}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<section class="content">
+    <div>
+        <div class="nav-scroller bg-body shadow-sm col-sm">
+            <nav class="nav" aria-label="Secondary navigation">
+                <a class="nav-link" href="profesionales">Listar</a>
+                <a class="nav-link active" href="profesionales_add">Nuevo profesional</a>
+            </nav>
+        </div>
+    </div>
+    <form action="/create_expert" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <div class="add">
+            <span class="fs-4">Información del profesional </span>
+            <div class="input-group input-group-sm mb-3 mt-3">
+                <span class="input-group-text">Nombre profesional</span>
+                <input type="text" class="form-control" name="nombre">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Apellido Paterno</span>
+                <input type="text" class="form-control" name="apellidoP">
+                <span class="input-group-text">Apellido M</span>
+                <input type="text" class="form-control" name="apellidoM">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Especialidad</span>
+                <input type="text" class="form-control" name="especialidad">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <a href="profesionales" class="btn btn-danger btn-sm w-50">Cancelar</a>
+                <button type="submit" class="btn btn-primary btn-sm w-50">Guardar cambios</button>
+            </div>
+        </div>
+    </form>
+</section>
+{% endblock %}

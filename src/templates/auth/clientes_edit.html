@@ -14,43 +14,43 @@
       <nav class="nav" aria-label="Secondary navigation">
         <a class="nav-link" href="clientes">Regresar</a>
         <a class="nav-link" href="clientes_info">Perfil</a>
-        <a class="nav-link active" href="clientes_edit">Editar</a>
+        <a class="nav-link" href="clientes_edit">Editar</a>
         <a class="nav-link" href="clientes_mascotas">Mascotas</a>
       </nav>
     </div>
-    <form action="/edit_cl" method="POST">
+    <form action="/edit_cl/{{ cliente.0 }}" method="POST">
       <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/> 
       <div class="add">
           <span class="input-group-text">Información del cliente</span>
           <div class="input-group input-group-sm mb-3">
               <span class="input-group-text">Nombre, apellidoP, apellidoM</span>
-              <input type="text" class="form-control" name="nombre_cl">
+              <input type="text" class="form-control" name="nombre_cl" value="{{ cliente.1 }}">
           </div>
           <div class="input-group input-group-sm mb-3">
               <span class="input-group-text">Rut</span>
-              <input type="text" class="form-control" name="rut_cl">
+              <input type="text" class="form-control" name="rut_cl" value="{{ cliente.2 }}">
               <span class="input-group-text">Cumpleaños</span>
-              <input type="date" class="form-control" name="cumpleaños_cl">
+              <input type="date" class="form-control" name="cumpleaños_cl" value="{{ cliente.3 }}">
               <span class="input-group-text">Fecha registro</span>
-              <input type="date" class="form-control" name="registro_cl">
+              <input type="date" class="form-control" name="registro_cl" value="{{ cliente.4 }}">
           </div>
           <hr>
           <span class="input-group-text">Información del contacto</span>
           <div class="input-group input-group-sm mb-3">
               <span class="input-group-text">Teléfono casa</span>
-              <input type="text" class="form-control" name="telefonoC">
+              <input type="text" class="form-control" name="telefonoC" value="{{ cliente.5 }}">
               <span class="input-group-text">Teléfono móvil</span>
-              <input type="text" class="form-control" name="telefonoM">
+              <input type="text" class="form-control" name="telefonoM" value="{{ cliente.6 }}">
               <span class="input-group-text">Teléfono trabajo</span>
-              <input type="text" class="form-control" name="telefonoT">
+              <input type="text" class="form-control" name="telefonoT" value="{{ cliente.7 }}">
           </div>
           <div class="input-group input-group-sm mb-3">
               <span class="input-group-text">Correo electrónico</span>
-              <input type="text" class="form-control" name="correo_cl">
+              <input type="text" class="form-control" name="correo_cl" value="{{ cliente.8 }}">
               <span class="input-group-text">Facebook</span>
-              <input type="text" class="form-control" name="facebook_cl">
+              <input type="text" class="form-control" name="facebook_cl" value="{{ cliente.9 }}">
               <span class="input-group-text">Cliente externo (Derivado)</span>
-              <select class="form-select" aria-label="Default select example" name="derivado">
+              <select class="form-select" aria-label="Default select example" name="derivado" value="{{ cliente.10 }}">
                   <option selected></option>
                   <option value="Si">Si</option>
                   <option value="No">No</option>
@@ -58,15 +58,15 @@
           </div>
           <div class="input-group input-group-sm mb-3">
               <span class="input-group-text">Dirección</span>
-              <input type="text" class="form-control" name="direccion_cl">
+              <input type="text" class="form-control" name="direccion_cl" value="{{ cliente.11 }}">
           </div>
           <div class="input-group input-group-sm mb-3">
               <span class="input-group-text">Referencias</span>
-              <textarea class="form-control" name="referencias"></textarea>
+              <textarea class="form-control" name="referencias" value="{{ cliente.12 }}"></textarea>
           </div>
           <div class="input-group input-group-sm mb-3">
               <span class="input-group-text">Notas</span>
-              <textarea class="form-control" name="notas"></textarea>
+              <textarea class="form-control" name="notas" value="{{ cliente.13 }}"></textarea>
           </div>
           <div class="input-group input-group-sm mb-3">
               <a href="clientes" class="btn btn-danger btn-sm">Cancelar</a>

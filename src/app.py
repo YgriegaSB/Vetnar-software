@@ -8,7 +8,6 @@ from conect.config import config
 
 # Modelos
 from models.ModelUser import ModelUser
-from models.ModelClient import ModelClient
 
 # Entities
 from models.entities.User import User
@@ -68,7 +67,6 @@ def clientes():
     cursor = db.connection.cursor()
     cursor.execute('SELECT nombre_cl, rut_cl, telefono_movil, correo_cl, direccion_cl FROM clientes')
     data = cursor.fetchall()
-    print (data)
     return render_template('auth/clientes_list.html', clientes = data)
 ######################################################
 # Redirigir a create_add
@@ -103,45 +101,105 @@ def create():
         # commit sql sentence
         db.connection.commit()
         # message
-        return redirect(url_for('clientes'))        
+        flash('Cliente agregado exitosamente') 
+        return redirect(url_for('clientes_add'))        
 
-######################################################
-# Redirigir a clientes_info
+######################### Clientes info #############################
 @app.route('/clientes_info')
 @login_required
 def clientes_info():
     return render_template('auth/clientes_info.html')
-######################################################
-# Redirigir a clientes_edit
-@app.route('/clientes_edit')
+
+######################### Clientes edit #############################
+@app.route('/edit_cl/<string:id_cliente>')
 @login_required
-def clientes_edit():
-    return render_template('auth/clientes_edit.html')
+def clientes_edit(id_cliente):
+    cursor = db.connection.cursor()
+    cursor.execute("SELECT * FROM clientes WHERE id_cliente = %s", (id_cliente))
+    data = cursor.fetchall()
+    return render_template('clientes_edit.html', cliente = data[0])
+
+@app.route('/edit_cl', methods=['POST'])
+@login_required
+def edit_cl(id_cliente):
+    if request.method == 'POST':    
+        nombrecl = request.form['nombre_cl']
+        rutcl = request.form['rut_cl']
+        cumpleañoscl = request.form['cumpleaños_cl']
+        registrocl = request.form['registro_cl']
+        telefonofcl = request.form['telefonoC']
+        telefonomcl = request.form['telefonoM']
+        telefonotcl = request.form['telefonoT']
+        correocl = request.form['correo_cl']
+        facebookcl = request.form['facebook_cl']
+        derivado = request.form['derivado']
+        direccioncl = request.form['direccion_cl']
+        referencias = request.form['referencias']
+        notas = request.form['notas']
+        cursor = db.connection.cursor()
+        sql = """ 
+        UPDATE clientes
+        SET nombre_cl = %s,
+            rut_cl = %s,
+            cumpleaños_cl = %s,
+            fecha_registro = %s,
+            telefono_casa = %s,
+            telefono_movil = %s,
+            telefono_trabajo = %s,
+            correo_cl = %s,
+            facebook_cl = %s,
+            derivado = %s,
+            direccion_cl = %s,
+            referencias_direc = %s,
+            notas_cl = %s
+        WHERE id_cliente = %s
+        """, (nombrecl, rutcl, cumpleañoscl, registrocl, telefonofcl, telefonomcl, 
+        telefonotcl, correocl, facebookcl, derivado, direccioncl, referencias, notas, cursor, id_cliente)
+        cursor.execute(sql)
+        db.connection.commit()
+        return redirect(url_for('clientes_edit'))
+
+######################### Clientes delete #############################
+@app.route('/delete_cl/<string:id_cliente>')
+@login_required
+def delete_cl(id_cliente):
+    cursor = db.connection.cursor()
+    cursor.execute('DELETE FROM clientes WHERE id_cliente = {0}'. format(id_cliente))
+    data = cursor.fetchall()
+    return redirect(url_for('clientes_list'))
 ######################################################
 # Redirigir a clientes_mascotas
 @app.route('/clientes_mascotas')
 @login_required
 def clientes_mascotas():
     return render_template('auth/clientes_mascotas.html')
-########################## Create  from clientes_add #############################
-@app.route('/create_cl', methods=['POST'])
-def create_cl():
-    if request.method == 'POST':
-
-        return ModelClient.create_cl(db, clientes)
-    else:
-        return render_template('auth/clientes_add.html')
 
 ################################################# Vistas mascotas ###########################################################
 @app.route('/mascotas')
 @login_required
 def mascotas():
     return render_template('auth/mascotas_list.html')
-######################################################
+
 @app.route('/mascotas_add')
 @login_required
 def mascotas_add():
     return render_template('auth/mascotas_add.html')
+
+@app.route('/create_pet', methods=['GET','POST'])
+@login_required
+def create_pet():
+    if request.method == 'POST':
+        nombre = request.form['servicio']
+        precio = request.form['area']
+        area = request.form['precio']
+        cursor = db.connection.cursor()
+        cursor.execute('INSERT INTO servicios (nombre, precio, area) VALUES (%s, %s, %s)', (nombre, precio,area))
+        # commit sql sentence
+        db.connection.commit()
+        # message
+        flash('Paciente agregado exitosamente') 
+        return redirect(url_for('mascotas_add'))
+
 ######################################################
 @app.route('/mascotas_razas')
 @login_required
@@ -163,7 +221,64 @@ def mascotas_edit():
 def mascotas_history():
     return render_template('auth/mascotas_history.html')
 ################################################# Vistas historial  ###########################################################
-################################################# Vistas historial  ###########################################################
+################################################# Vistas servicios  ###########################################################
+@app.route('/servicios')
+@login_required
+def servicios_list():
+    cursor = db.connection.cursor()
+    cursor.execute('SELECT nombre, precio, area FROM servicios')
+    data = cursor.fetchall()
+    return render_template('auth/servicios.html', servicios = data)
+################ Add servicio ################
+@app.route('/servicios_add')
+@login_required
+def servicios_add():
+    return render_template('auth/servicios_add.html')
+
+@app.route('/create_service', methods=['GET','POST'])
+@login_required
+def create_ser():
+    if request.method == 'POST':
+        nombre = request.form['servicio']
+        precio = request.form['area']
+        area = request.form['precio']
+        cursor = db.connection.cursor()
+        cursor.execute('INSERT INTO servicios (nombre, precio, area) VALUES (%s, %s, %s)', (nombre, precio,area))
+        # commit sql sentence
+        db.connection.commit()
+        # message
+        flash('Servicio agregado exitosamente') 
+        return redirect(url_for('servicios_add'))
+
+################################################# Vistas profesionales  ###########################################################
+@app.route('/profesionales')
+@login_required
+def profesionales_list():
+    cursor = db.connection.cursor()
+    cursor.execute('SELECT nombre, apellidoP, apellidoM, especialidad FROM profesionales')
+    data = cursor.fetchall()
+    return render_template('auth/profesionales.html', profesionales = data)
+
+@app.route('/profesionales_add')
+@login_required
+def profesionales_add():
+    return render_template('auth/profesionales_add.html')
+
+@app.route('/create_expert', methods=['GET','POST'])
+@login_required
+def create_exp():
+    if request.method == 'POST':
+        nombre = request.form['nombre']
+        apellidop = request.form['apellidoP']
+        apellidom = request.form['apellidoM']
+        especialidad = request.form['especialidad']
+        cursor = db.connection.cursor()
+        cursor.execute('INSERT INTO profesionales (nombre, apellidoP, apellidoM, especialidad) VALUES (%s, %s, %s, %s)', (nombre, apellidop, apellidom, especialidad))
+        # commit sql sentence
+        db.connection.commit()
+        # message
+        flash('Profesional agregado exitosamente') 
+        return redirect(url_for('profesionales_add'))
 ################################################# Vistas config     ###########################################################
 
 def status_401(error):

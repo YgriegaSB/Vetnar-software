@@ -17,16 +17,12 @@
       transform: translateX(-100%);
     }
   }
-  
-  .nav-scroller .nav {
-    color: rgba(255, 255, 255, .75);
-  }
-  
+
   .nav-scroller .nav-link {
     padding-top: .75rem;
     padding-bottom: .75rem;
     font-size: .875rem;
-    color: #6c757d;
+    color: #3f3f3f;
   }
   
   .nav-scroller .nav-link:hover {
@@ -38,21 +34,8 @@
     color: #55a27a;  
   }
   
-  .bg-purple {
-    background-color: #6f42c1;
-  }
-
-  .content {
-    float: right;
-    width: 83.25%;
-  }
-
   .add {
     padding: 20px;
-  }
-
-  .btn {
-    width: 50%;
   }
   
   .table {

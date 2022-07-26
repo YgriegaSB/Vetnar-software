@@ -21,6 +21,55 @@
     </div>
     <form action="" method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/> 
+        <div class="add">
+            <span class="fs-4">Información del paciente </span>
+            <div class="input-group input-group-sm mb-3 mt-3">
+                <span class="input-group-text">Buscar propietario</span>
+                <input type="text" class="form-control" name="propietario">
+                <span class="input-group-text">Nombre paciente</span>
+                <input type="text" class="form-control" name="paciente">
+            </div>
+            <div class="input-group input-group-sm mb-4">
+                <span class="input-group-text">Fecha de nacimiento</span>
+                <input type="date" class="form-control" name="nacimiento">
+                <span class="input-group-text">Microchip</span>
+                <input type="text" class="form-control" name="chip">
+            </div>
+            <div class="input-group input-group-sm mb-4">
+                <span class="input-group-text">Especie</span>
+                <input type="text" class="form-control" name="especie">
+                <span class="input-group-text">Raza</span>
+                <input type="text" class="form-control" name="raza">
+                <span class="input-group-text">Sexo</span>
+                <select class="form-select" aria-label="Default select example" name="sexo">
+                    <option selected></option>
+                    <option value="Macho">Macho</option>
+                    <option value="Hembra">Hembra</option>
+                </select>
+            </div>
+            <div class="input-group input-group-sm mb-4">
+                <span class="input-group-text">Entero / Castrado</span>
+                <select class="form-select" aria-label="Default select example" name="castrado">
+                    <option selected></option>
+                    <option value="Entero">Entero</option>
+                    <option value="Castrado">Castrado</option>
+                </select>
+                <span class="input-group-text">Asegurado</span>
+                <select class="form-select" aria-label="Default select example" name="asegurado">
+                    <option selected></option>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Notas</span>
+                <textarea class="form-control" name="notas"></textarea>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <a href="mascotas" class="btn btn-danger btn-sm w-50">Cancelar</a>
+                <button type="submit" class="btn btn-primary btn-sm w-50">Guardar cambios</button>
+            </div>
+        </div>
     </form>
 </section>
 {% endblock %}
