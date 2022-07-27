@@ -8,24 +8,34 @@
 {% block title %} Mascotas | Nuevo {% endblock %}
 
 {% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for messages in messages %}
+<div class="alert alert-success alert-dismissible" role="alert">
+    <strong>{{messages}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
 <section class="content">
     <div>
         <div class="nav-scroller bg-body shadow-sm col-sm">
             <nav class="nav" aria-label="Secondary navigation">
                 <a class="nav-link" href="mascotas">Listar</a>
                 <a class="nav-link active" href="mascotas_add">Nueva mascota</a>
-                <a class="nav-link" href="mascotas_razas">Razas</a>
-                <a class="nav-link" href="#">Gestión</a>
             </nav>
         </div>
     </div>
-    <form action="" method="POST">
+    <form action="/create_pet" method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/> 
         <div class="add">
             <span class="fs-4">Información del paciente </span>
-            <div class="input-group input-group-sm mb-3 mt-3">
-                <span class="input-group-text">Buscar propietario</span>
-                <input type="text" class="form-control" name="propietario">
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Propietario</span>
+                <input type="search" class="form-control" placeholder="Nombre cliente" name="clientes">
+            </div>
+            <div class="input-group input-group-sm mb-3">
                 <span class="input-group-text">Nombre paciente</span>
                 <input type="text" class="form-control" name="paciente">
             </div>
@@ -48,11 +58,11 @@
                 </select>
             </div>
             <div class="input-group input-group-sm mb-4">
-                <span class="input-group-text">Entero / Castrado</span>
+                <span class="input-group-text">Castrado</span>
                 <select class="form-select" aria-label="Default select example" name="castrado">
                     <option selected></option>
-                    <option value="Entero">Entero</option>
-                    <option value="Castrado">Castrado</option>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
                 </select>
                 <span class="input-group-text">Asegurado</span>
                 <select class="form-select" aria-label="Default select example" name="asegurado">

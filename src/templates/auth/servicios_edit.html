@@ -27,20 +27,20 @@
             </nav>
         </div>
     </div>
-    <form action="/create_service" method="POST">
+    <form action="/update_service/{{servicio.0}}" method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         <div class="add">
             <span class="fs-4">Información del servicio </span>
             <div class="input-group input-group-sm mb-3 mt-3">
                 <span class="input-group-text">Nombre servicio</span>
-                <input type="text" class="form-control" name="servicio">
+                <input type="text" class="form-control" name="servicio" value="{{servicio.1}}">
             </div>
             <div class="input-group input-group-sm mb-3">
                 <span class="input-group-text">Precio $</span>
-                <input type="text" class="form-control" name="precio" placeholder="0.0">
+                <input type="text" class="form-control" name="precio" placeholder="0.0" value="{{servicio.2}}">
             </div>
             <div class="input-group input-group-sm mb-3">
-                <a href="servicios" class="btn btn-danger btn-sm w-50">Cancelar</a>
+                <a href="/servicios" class="btn btn-danger btn-sm w-50">Cancelar</a>
                 <button type="submit" class="btn btn-primary btn-sm w-50">Guardar cambios</button>
             </div>
             

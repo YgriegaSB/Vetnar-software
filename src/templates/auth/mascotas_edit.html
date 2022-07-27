@@ -5,19 +5,86 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/clientes.css') }}">
 {% endblock %}
 
-{% block title %} Mascotas | Perfil {% endblock %}
+{% block title %} Mascotas | Edit {% endblock %}
 
 {% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for messages in messages %}
+<div class="alert alert-success alert-dismissible" role="alert">
+    <strong>{{messages}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
 <section class="content">
     <div>
         <div class="nav-scroller bg-body shadow-sm col-sm">
             <nav class="nav" aria-label="Secondary navigation">
-                <a class="nav-link" href="mascotas">Regresar</a>
+                <a class="nav-link" href="/mascotas">Regresar</a>
                 <a class="nav-link" href="mascotas_info">Perfil</a>
-                <a class="nav-link active" href="mascotas_edit">Editar</a>
+                <a class="nav-link active" href="/edit_pet/{{mascota.0}}">Editar</a>
                 <a class="nav-link" href="mascotas_history">Historial clinico</a>
             </nav>
         </div>
     </div>
+</section>
+
+<section class="content">
+    <form action="/update_pet/{{mascota.0}}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/> 
+        <div class="add">
+            <span class="fs-4">Información del paciente </span>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Propietario</span>
+                <input type="search" class="form-control" placeholder="Nombre cliente" name="clientes" value="{{mascota.1}}">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Nombre paciente</span>
+                <input type="text" class="form-control" name="paciente" value="{{mascota.2}}">
+            </div>
+            <div class="input-group input-group-sm mb-4">
+                <span class="input-group-text">Fecha de nacimiento</span>
+                <input type="date" class="form-control" name="nacimiento" value="{{mascota.3}}">
+                <span class="input-group-text">Microchip</span>
+                <input type="text" class="form-control" name="chip" value="{{mascota.4}}">
+            </div>
+            <div class="input-group input-group-sm mb-4">
+                <span class="input-group-text">Especie</span>
+                <input type="text" class="form-control" name="especie" value="{{mascota.5}}">
+                <span class="input-group-text">Raza</span>
+                <input type="text" class="form-control" name="raza" value="{{mascota.6}}">
+                <span class="input-group-text">Sexo</span>
+                <select class="form-select" aria-label="Default select example" name="sexo">
+                    <option selected value="{{mascota.7}}"></option>
+                    <option value="Macho">Macho</option>
+                    <option value="Hembra">Hembra</option>
+                </select>
+            </div>
+            <div class="input-group input-group-sm mb-4">
+                <span class="input-group-text">Castrado</span>
+                <select class="form-select" aria-label="Default select example" name="castrado">
+                    <option selected value="{{mascota.8}}"></option>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                </select>
+                <span class="input-group-text">Asegurado</span>
+                <select class="form-select" aria-label="Default select example" name="asegurado">
+                    <option selected value="{{mascota.9}}"></option>
+                    <option value="Si">Si</option>
+                    <option value="No">No</option>
+                </select>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Notas</span>
+                <textarea class="form-control" name="notas" value="{{mascota.10}}"></textarea>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <a href="/mascotas" class="btn btn-danger btn-sm w-50">Cancelar</a>
+                <button type="submit" class="btn btn-primary btn-sm w-50">Guardar cambios</button>
+            </div>
+        </div>
+    </form>
 </section>
 {% endblock %}

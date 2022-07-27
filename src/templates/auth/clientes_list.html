@@ -8,6 +8,16 @@
 {% block title %} Clientes | Listar {% endblock %}
 
 {% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for messages in messages %}
+<div class="alert alert-success alert-dismissible" role="alert">
+  <strong>{{messages}}</strong>
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
 <section class="content">
   <div>
     <div class="nav-scroller bg-body shadow-sm col-sm">
@@ -19,10 +29,11 @@
   </div>
 </section>
 <!-- Recibo datos [nombre_cl, rut_cl, telefono_movil, correo_cl, direccion_cl] -->
-<section class="container mt-3">
+<section class="container-fluid mt-3">
   <table id="tabla-clientes" class="table table-striped">
     <thead>
     <tr>
+        <td>Codigo</td>
         <td>Nombre</td>
         <td>Rut</td>
         <td>Telefono Movil</td>
@@ -40,13 +51,14 @@
             <td>{{ cliente.2 }}</td>
             <td>{{ cliente.3 }}</td>
             <td>{{ cliente.4 }}</td>
+            <td>{{ cliente.5 }}</td>
             <td>
-              <a class="px-1 text-success" href="/edit_cl/{{ cliente.0 }}">
+              <a class="px-1 text-success" href="/edit_client/{{ cliente.0 }}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
                   <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
                 </svg>
               </a>
-              <a class="px-1 text-danger"  href="/delete_cl/{{ cliente.0 }}">
+              <a class="px-1 text-danger"  href="/delete_cl/{{cliente.0}}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
                   <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
                 </svg>

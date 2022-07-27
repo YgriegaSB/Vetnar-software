@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/clientes.css') }}">
 {% endblock %}
 
-{% block title %} Servicio | Nuevo {% endblock %}
+{% block title %} Profesionales | Nuevo {% endblock %}
 
 {% block content %}
 {% with messages = get_flashed_messages() %}
@@ -22,28 +22,33 @@
     <div>
         <div class="nav-scroller bg-body shadow-sm col-sm">
             <nav class="nav" aria-label="Secondary navigation">
-                <a class="nav-link" href="servicios">Listar</a>
-                <a class="nav-link active" href="servicios_add">Nuevo servicio</a>
+                <a class="nav-link" href="profesionales">Listar</a>
+                <a class="nav-link active" href="profesionales_add">Nuevo profesional</a>
             </nav>
         </div>
     </div>
-    <form action="/create_service" method="POST">
+    <form action="/update_expert/{{profesional.0}}" method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
         <div class="add">
-            <span class="fs-4">Información del servicio </span>
+            <span class="fs-4">Información del profesional </span>
             <div class="input-group input-group-sm mb-3 mt-3">
-                <span class="input-group-text">Nombre servicio</span>
-                <input type="text" class="form-control" name="servicio">
+                <span class="input-group-text">Nombre profesional</span>
+                <input type="text" class="form-control" name="nombre" value="{{profesional.1}}">
             </div>
             <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text">Precio $</span>
-                <input type="text" class="form-control" name="precio" placeholder="0.0">
+                <span class="input-group-text">Apellido Paterno</span>
+                <input type="text" class="form-control" name="apellidoP" value="{{profesional.2}}">
+                <span class="input-group-text">Apellido M</span>
+                <input type="text" class="form-control" name="apellidoM" value="{{profesional.3}}">
             </div>
             <div class="input-group input-group-sm mb-3">
-                <a href="servicios" class="btn btn-danger btn-sm w-50">Cancelar</a>
+                <span class="input-group-text">Especialidad</span>
+                <input type="text" class="form-control" name="especialidad" value="{{profesional.4}}">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <a href="/profesionales" class="btn btn-danger btn-sm w-50">Cancelar</a>
                 <button type="submit" class="btn btn-primary btn-sm w-50">Guardar cambios</button>
             </div>
-            
         </div>
     </form>
 </section>

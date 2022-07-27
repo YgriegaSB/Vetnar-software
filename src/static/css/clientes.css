@@ -38,7 +38,12 @@
     padding: 20px;
   }
   
+  .search {
+    
+    padding: 20px;
+  }
+
   .table {
-    float: right;
-    width: 83.25%;
+    font-size: 14px;
+    width: 100%;
   }
