@@ -1,0 +1,26 @@
+{% extends 'auth/settings.html' %}
+
+{% block customCSS %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/clientes.css') }}">
+{% endblock %}
+
+{% block title %} Usuario | Nuevo {% endblock %}
+
+{% block content %}
+<div class="alert alert-warning alert-dismissible" role="alert">
+    <strong>Hola {{ current_user.fullname }}, a continuación se listan las maneras en que puedes contactarnos para recibir ayuda</strong>
+</div>
+<section class="container-fluid">
+    <h3 class="text-success ps-5">Contactos</h3>
+    <div class="info">
+        <h5>Información de contacto y soporte</h5>
+        <p>nicolas.pinochet03@inacapmail.cl <span>Administración y soporte</span></p>
+        <p>erik.moncada@inacapmail.cl <span>Soporte</span></p>
+        <p>jose.morales78@inacapmail.cl <span>Soporte</span></p>    
+        <p class="d-flex">
+            +56996697572 &nbsp; (Horario de atención de Lunes a Viernes de 9:00 AM a 01:00 PM y de 02:00 PM a 06:00 PM)
+        </p>
+    </div>
+</section>
+{% endblock %}

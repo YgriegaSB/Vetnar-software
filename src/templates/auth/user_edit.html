@@ -1,0 +1,59 @@
+{% extends 'auth/settings.html' %}
+
+{% block customCSS %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/clientes.css') }}">
+{% endblock %}
+
+{% block title %} Usuario | Editar {% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for messages in messages %}
+<div class="alert alert-success alert-dismissible" role="alert">
+    <strong>{{messages}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<section class="content">
+    <div>
+        <div class="nav-scroller bg-body shadow-sm col-sm">
+            <nav class="nav" aria-label="Secondary navigation">
+                <a class="nav-link" href="/usuarios_list">Listar</a>
+                <a class="nav-link active" href="/edit_user/{{user.0}}">Editar usuario</a>
+            </nav>
+        </div>
+    </div>
+    <form action="/update_user/{{user.0}}" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <div class="add">
+            <span class="fs-4">Información del usuario </span>
+            <div class="input-group input-group-sm mb-3 mt-3">
+                <span class="input-group-text">Correo</span>
+                <input type="text" class="form-control" value="{{user.1}}" name="correo" placeholder="Correo o Rut del empleado">
+                <span class="input-group-text">Contraseña</span>
+                <input type="password" class="form-control" value="user.2" name="contraseña" placeholder="**************">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Nombre completo</span>
+                <input type="text" class="form-control" value="{{user.3}}" name="nombre" placeholder="Nombre1 A.paterno A.materno">
+                <span class="input-group-text">Nombre completo</span>
+                <input type="text" class="form-control" value="{{user.4}}" name="rol" placeholder="Admin, Tecnico veterinario, Médico">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Telefono móvil</span>
+                <input type="text" class="form-control" value="{{user.5}}" name="movil" placeholder="+569--------">
+                <span class="input-group-text">Domicilio</span>
+                <input type="text" class="form-control" value="{{user.6}}" name="domicilio" placeholder="direccion #---, Distrito">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <a href="/usuarios_list" class="btn btn-danger btn-sm w-50">Cancelar</a>
+                <button type="submit" class="btn btn-primary btn-sm w-50">Guardar cambios</button>
+            </div>  
+        </div>
+    </form>
+</section>
+{% endblock %}

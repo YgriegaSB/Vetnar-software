@@ -1,0 +1,64 @@
+{% extends 'auth/settings.html' %}
+
+{% block customCSS %} 
+<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/clientes.css') }}">
+{% endblock %}
+
+{% block title %} Usuarios | Listar {% endblock %}
+
+{% block content %}
+
+<div class="alert alert-warning" role="alert">
+  <strong>Las contraseñas creadas son encriptadas, por lo tanto, la que se puede visualizar no es una contraseña valida para ingresar al sistema</strong>
+</div>
+<section class="content">
+    <div>
+        <div class="nav-scroller bg-body shadow-sm col-sm">
+            <nav class="nav" aria-label="Secondary navigation">
+                <a class="nav-link active" href="/usuarios_list">Listar</a>
+                <a class="nav-link" href="/usuarios_add">Crear usuario</a>
+            </nav>
+        </div>
+    </div>
+</section>
+<!-- Recibo datos [servicios] -->
+<section class="container-fluid mt-3">
+    <table id="tabla-usuarios" class="table table-striped">
+        <thead>
+        <tr>
+            <td>Codigo</td>
+            <td>Correo</td>
+            <td>Contraseña</td>
+            <td>Fullname</td>
+            <td>Rol</td>
+            <td>Acción</td>
+        </tr>
+        </thead>
+      <tbody>
+        <!-- for para listar clientes -->
+          {% for user in user %}
+            <tr>
+                <td>{{ user.0 }}</td>
+                <td>{{ user.1 }}</td>
+                <td>{{ user.2 }}</td>
+                <td>{{ user.3 }}</td>
+                <td>{{ user.4 }}</td>
+                <td class="justify-content-center">
+                    <a class="px-1 text-success" href="/edit_user/{{user.0}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+                        <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                    </svg>
+                    </a>
+                    <a class="px-1 text-danger"  href="/delete_user/{{user.0}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                    </svg>
+                    </a>
+                </td>
+            </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+</section>
+{% endblock %}

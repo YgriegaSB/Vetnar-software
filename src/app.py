@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_mysqldb import MySQL
 from flask_wtf.csrf import CSRFProtect
 from flask_login import LoginManager, login_user, logout_user, login_required
+from werkzeug.security import  generate_password_hash
 
 # conexion bd
 from conect.config import config
@@ -57,7 +58,7 @@ def logout():
 @app.route('/home')
 @login_required
 def home():
-    return render_template('home.html')
+    return render_template('auth/adirectos.html')
 
 ################################################# Vistas cliente ###########################################################
 ########################## Listar clientes #############################
@@ -164,7 +165,7 @@ def edit_cl(id_cliente):
 
 ######################### Clientes delete #############################
 @app.route('/delete_cl/<string:id_cliente>')
-def delete_user(id_cliente):
+def delete_cl(id_cliente):
     cur = db.connection.cursor()
     cur.execute('DELETE FROM clientes WHERE id_cliente = {}'. format(id_cliente))
     db.connection.commit()
@@ -331,7 +332,7 @@ def get_serv(id_servicio):
     return render_template('auth/servicios_edit.html', servicio = data[0])
 # upgrade
 @app.route('/update_service/<id_servicio>', methods = ['POST'])
-def update_user(id_servicio):
+def update_service(id_servicio):
     if request.method == 'POST':
         nombre = request.form['servicio']
         precio = request.form['precio']
@@ -420,8 +421,94 @@ def delete_expert(id_profesional):
     flash('Profesional removido satisfactoriamente')    
     return redirect(url_for('profesionales_add'))
         
-################################################# Vistas config     ###########################################################
+################################################# Vistas settings     ###########################################################
+@app.route('/settings')
+@login_required
+def settings():
+    return render_template('auth/settings.html')
 
+@app.route('/usuarios_list')
+@login_required
+def user_list():
+    cursor = db.connection.cursor()
+    cursor.execute('SELECT * FROM user')
+    data = cursor.fetchall()
+    return render_template('auth/user_list.html', user = data)
+
+@app.route('/usuarios_add')
+@login_required
+def usuarios_add():
+    return render_template('auth/user_add.html')
+
+################ Agregar profesional ################
+@app.route('/user_add', methods=['GET','POST'])
+@login_required
+def create_user():
+    if request.method == 'POST':
+        # Recepcion de datos form
+        correo = request.form['correo']
+        contraseña = request.form['contraseña']
+        nombre = request.form['nombre']
+        rol = request.form['rol']
+        movil = request.form['movil']
+        domicilio = request.form['domicilio']
+        # Hasheo de pássword
+        password_hashed = generate_password_hash(contraseña)
+        cursor = db.connection.cursor()
+        cursor.execute('INSERT INTO user (username, password, fullname, rol, t_movil, domicilio) VALUES (%s, %s, %s, %s, %s, %s)', (correo, password_hashed, nombre, rol, movil, domicilio))
+        # commit sql sentence
+        db.connection.commit()
+        # message
+        flash('Usuario agregado exitosamente') 
+        return redirect(url_for('usuarios_add'))
+# Editar
+@app.route('/edit_user/<id>')
+def get_user(id):
+    cursor = db.connection.cursor()
+    cursor.execute('SELECT * FROM user WHERE id = {}'. format(id))
+    data = cursor.fetchall()
+    return render_template('auth/user_edit.html', user = data[0])
+# upgrade
+@app.route('/update_user/<id>', methods = ['POST'])
+def update_user(id):
+    if request.method == 'POST':
+        correo = request.form['correo']
+        contraseña = request.form['contraseña']
+        nombre = request.form['nombre']
+        rol = request.form['rol']
+        movil = request.form['movil']
+        domicilio = request.form['domicilio']
+        password_hashed = generate_password_hash(contraseña)
+        cur = db.connection.cursor()
+        cur.execute( """
+        UPDATE user
+        SET username = %s,
+            password = %s, 
+            fullname = %s, 
+            rol = %s, 
+            t_movil = %s, 
+            domicilio = %s
+        WHERE id = %s
+        """, (correo, password_hashed, nombre, rol, movil, domicilio, id))
+        db.connection.commit()
+        flash('Usuario actualizado satisfactoriamente')
+        return redirect(url_for('user_list'))
+
+@app.route('/delete_user/<string:id>')
+def delete_user(id):
+    cur = db.connection.cursor()
+    cur.execute('DELETE FROM user WHERE id = {}'. format(id))
+    db.connection.commit()
+    flash('Usuario removido satisfactoriamente')    
+    return redirect(url_for('usuarios_add'))
+
+# Necesitas ayuda
+@app.route('/need_help')
+@login_required
+def help():
+    return render_template('auth/help.html')
+
+# Captura de errores
 def status_401(error):
     return redirect(url_for('login'))
 
