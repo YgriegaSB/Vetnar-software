@@ -13,7 +13,7 @@
     <div class="nav-scroller bg-body shadow-sm col-sm">
       <nav class="nav" aria-label="Secondary navigation">
         <a class="nav-link" href="/clientes">Regresar</a>
-        <a class="nav-link" href="/clientes_info">Perfil</a>
+        <a class="nav-link" href="/perfil_cl/{{cliente.0}}">Perfil</a>
         <a class="nav-link active" href="/edit_client/{{ cliente.0 }}">Editar</a>
         <a class="nav-link" href="/clientes_mascotas">Mascotas</a>
       </nav>
@@ -65,11 +65,11 @@
         </div>
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text">Referencias</span>
-            <textarea class="form-control" name="referencias" value="{{ cliente.12 }}"></textarea>
+            <textarea class="form-control" name="referencias" value="{{ cliente.12 }}">{{ cliente.12 }}</textarea>
         </div>
         <div class="input-group input-group-sm mb-3">
             <span class="input-group-text">Notas</span>
-            <textarea class="form-control" name="notas" value="{{ cliente.13 }}"></textarea>
+            <textarea class="form-control" name="notas" value="{{ cliente.13 }}">{{ cliente.13 }}</textarea>
         </div>
         <div class="input-group input-group-sm mb-3">
             <a href="/clientes" class="btn btn-danger btn-sm w-50">Cancelar</a>

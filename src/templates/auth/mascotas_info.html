@@ -5,18 +5,54 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/clientes.css') }}">
 {% endblock %}
 
-{% block title %} Mascotas | Perfil {% endblock %}
 
+{% block title %} Mascotas | Perfil {% endblock %}
 {% block content %}
 <section class="content">
     <div>
         <div class="nav-scroller bg-body shadow-sm col-sm">
             <nav class="nav" aria-label="Secondary navigation">
-                <a class="nav-link" href="mascotas">Regresar</a>
-                <a class="nav-link active" href="mascotas_info">Perfil</a>
-                <a class="nav-link" href="mascotas_edit">Editar</a>
-                <a class="nav-link" href="mascotas_history">Historial clinico</a>
+                <a class="nav-link" href="/mascotas">Regresar</a>
+                <a class="nav-link active" href="/perfil_pet/{{mascota.0}}">Perfil</a>
+                <a class="nav-link" href="/edit_pet/{{mascota.0}}">Editar</a>
+                <a class="nav-link" href="#">Historial clinico</a>
             </nav>
+        </div>
+    </div>
+</section>
+<section class="content">
+    <div class="perfil">
+        <span class="input-group-text bg-success fw-bold text-white">Ficha del paciente</span>
+        <div class="input-group input-group-sm mb-3 mt-3">
+            <label class="text-success ">Dueño: &nbsp;</label>
+            <p class="fw-bold">{{mascota.1}}</p>
+        </div>
+        <div class="input-group mb-3">
+            <label class="text-success ">Nombre paciente: &nbsp;</label>
+            <p class="me-5 fw-bold">{{mascota.2}}</p>
+            <label class="text-success ">Fecha nacimiento: &nbsp;</label>
+            <p class="me-5 fw-bold">{{mascota.3}}</p>
+            <label class="text-success ">Microchip: &nbsp;</label>
+            <p class=" fw-bold">{{mascota.4}}</p>
+        </div>
+        <hr>
+        <div class="input-group input-group-sm mb-3 mt-3">
+            <label class="text-success ">Especie: &nbsp;</label>
+            <p class="me-5 fw-bold">{{mascota.5}}</p>
+            <label class="text-success ">Raza: &nbsp;</label>
+            <p class="me-5 fw-bold">{{mascota.6}}</p>
+            <label class="text-success ">Sexo: &nbsp;</label>
+            <p class=" fw-bold">{{mascota.7}}</p>
+        </div>
+        <div class="input-group input-group-sm mb-3 mt-3">
+            <label class="text-success ">Castrado: &nbsp;</label>
+            <p class="me-5 fw-bold">{{mascota.8}}</p>
+            <label class="text-success ">Asegurado: &nbsp;</label>
+            <p class="fw-bold">{{mascota.9}}</p>
+        </div>
+        <div class="input-group input-group-sm mb-3">
+            <label class="text-success ">Notas: &nbsp;</label>
+            <p class="fw-bold">{{mascota.10}}</p>
         </div>
     </div>
 </section>

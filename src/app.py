@@ -105,10 +105,13 @@ def create():
         return redirect(url_for('clientes_add'))        
 
 ######################### Clientes info #############################
-@app.route('/clientes_info')
+@app.route('/perfil_cl/<id_cliente>')
 @login_required
-def clientes_info():
-    return render_template('auth/clientes_info.html')
+def perfil_cl(id_cliente):
+    cursor = db.connection.cursor()
+    cursor.execute('SELECT * FROM clientes WHERE id_cliente = {}'. format(id_cliente))
+    data = cursor.fetchall()
+    return render_template('auth/clientes_info.html', cliente = data[0])
 
 ######################### Clientes edit #############################
 @app.route('/edit_client/<id_cliente>')
@@ -130,7 +133,7 @@ def edit_cl(id_cliente):
         telefonofcl = request.form['telefonoC']
         telefonomcl = request.form['telefonoM']
         telefonotcl = request.form['telefonoT']
-        correocl = request.form['correo_cl']
+        correo_cl = request.form['correo_cl']
         facebookcl = request.form['facebook_cl']
         derivado = request.form['derivado']
         direccioncl = request.form['direccion_cl']
@@ -154,7 +157,7 @@ def edit_cl(id_cliente):
             notas_cl = %s
         WHERE id_cliente = %s
         """, (nombrecl, rutcl, cumpleañoscl, registrocl, telefonofcl, telefonomcl, 
-        telefonotcl, correocl, facebookcl, derivado, direccioncl, referencias, notas, id_cliente))
+        telefonotcl, correo_cl, facebookcl, derivado, direccioncl, referencias, notas, id_cliente))
         db.connection.commit()
         flash('Cliente actualizado satisfactoriamente')
         return redirect(url_for('clientes'))
@@ -223,6 +226,15 @@ def create_pet():
         # message
         flash('Paciente agregado exitosamente') 
         return redirect(url_for('mascotas_add'))
+
+# Perfil
+@app.route('/perfil_pet/<id_mascota>')
+@login_required
+def perfil_pet(id_mascota):
+    cursor = db.connection.cursor()
+    cursor.execute('SELECT * FROM mascotas WHERE id_mascota = {}'. format(id_mascota))
+    data = cursor.fetchall()
+    return render_template('auth/mascotas_info.html', mascota = data[0])
 
 # Editar
 @app.route('/edit_pet/<id_mascota>')

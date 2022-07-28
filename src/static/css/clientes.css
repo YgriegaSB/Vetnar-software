@@ -37,9 +37,14 @@
   .add {
     padding: 20px;
   }
+
+  .perfil {
+    padding: 20px;
+    width: 50%;
+    margin-left: 25%;
+  }
   
   .search {
-    
     padding: 20px;
   }
 

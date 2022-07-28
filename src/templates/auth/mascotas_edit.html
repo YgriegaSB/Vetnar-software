@@ -23,9 +23,9 @@
         <div class="nav-scroller bg-body shadow-sm col-sm">
             <nav class="nav" aria-label="Secondary navigation">
                 <a class="nav-link" href="/mascotas">Regresar</a>
-                <a class="nav-link" href="mascotas_info">Perfil</a>
+                <a class="nav-link" href="/perfil_pet/{{mascota.0}}">Perfil</a>
                 <a class="nav-link active" href="/edit_pet/{{mascota.0}}">Editar</a>
-                <a class="nav-link" href="mascotas_history">Historial clinico</a>
+                <a class="nav-link" href="#">Historial clinico</a>
             </nav>
         </div>
     </div>
@@ -37,7 +37,7 @@
         <div class="add">
             <span class="fs-4">Información del paciente </span>
             <div class="input-group input-group-sm mb-3">
-                <span class="input-group-text">Propietario</span>
+                <span class="input-group-text">Dueño</span>
                 <input type="search" class="form-control" placeholder="Nombre cliente" name="clientes" value="{{mascota.1}}">
             </div>
             <div class="input-group input-group-sm mb-3">

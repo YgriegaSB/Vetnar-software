@@ -8,16 +8,65 @@
 {% block title %} Clientes | Perfil {% endblock %}
 
 {% block content %}
+<div class="nav-scroller bg-body shadow-sm col-sm">
 <section class="content">
   <div>
-    <div class="nav-scroller bg-body shadow-sm col-sm">
       <nav class="nav" aria-label="Secondary navigation">
-        <a class="nav-link" href="clientes">Regresar</a>
-        <a class="nav-link active" href="clientes_info">Perfil</a>
-        <a class="nav-link" href="clientes_edit">Editar</a>
+        <a class="nav-link" href="/clientes">Regresar</a>
+        <a class="nav-link active" href="/perfil_cl/{{cliente.0}}">Perfil</a>
+        <a class="nav-link" href="/edit_client/{{ cliente.0 }}">Editar</a>
         <a class="nav-link" href="clientes_mascotas">Mascotas</a>
       </nav>
     </div>
   </div>
+</section>
+<section class="content">
+  <div class="perfil">
+    <span class="input-group-text bg-success fw-bold text-white">Ficha del cliente</span>
+    <div class="input-group input-group-sm mb-3 mt-3">
+        <label class="text-success ">Nombre AP AM: &nbsp;</label>
+        <p class="fw-bold">{{cliente.1}}</p>
+    </div>
+    <div class="input-group mb-3">
+        <label class="text-success ">Rut: &nbsp;</label>
+        <p class="me-5 fw-bold">{{cliente.2}}</p>
+        <label class="text-success ">Cumpleaños: &nbsp;</label>
+        <p class="me-5 fw-bold">{{cliente.3}}</p>
+        <label class="text-success ">Registro: &nbsp;</label>
+        <p class=" fw-bold">{{cliente.4}}</p>
+    </div>
+    <hr>
+    <span class="input-group-text bg-success fw-bold text-white">Información de contacto</span>
+    <div class="input-group input-group-sm mb-3 mt-3">
+      <label class="ms-5 text-success ">Telefono casa: &nbsp;</label>
+      <p class="me-5 fw-bold">{{cliente.5}}</p>
+      <label class="text-success">Telefono móvil: &nbsp;</label>
+      <p class="fw-bold">{{cliente.6}}</p>
+    </div>
+    <div class="input-group input-group-sm mb-3 mt-3">
+      <label class="ms-5 text-success ">Telefono trabajo: &nbsp;</label>
+      <p class="me-5 fw-bold">{{cliente.7}}</p>
+      <label class="text-success ">Correo: &nbsp;</label>
+      <p class="fw-bold">{{cliente.8}}</p>
+    </div>
+    <div class="input-group input-group-sm mb-3">
+      <label class="ms-5 text-success ">Facebook: &nbsp;</label>
+      <p class="me-5 fw-bold">{{cliente.9}}</p>
+      <label class="text-success ">Derivado: &nbsp;</label>
+      <p class="fw-bold">{{cliente.10}}</p>
+    </div>
+    <div class="input-group input-group-sm mb-3">
+      <label class="text-success ">Dirección: &nbsp;</label>
+      <p class="ms-5 fw-bold">{{cliente.11}}</p>
+    </div>
+    <div class="input-group input-group-sm mb-3">
+      <label class="text-success ">Referencias: &nbsp;</label>
+      <p class="ms-5 fw-bold">{{cliente.12}}</p>
+    </div>
+    <div class="input-group input-group-sm mb-3">
+      <label class="text-success ">Notas: &nbsp;</label>
+      <p class="ms-5 fw-bold">{{cliente.13}}</p>
+    </div>
+</div>
 </section>
 {% endblock %}
