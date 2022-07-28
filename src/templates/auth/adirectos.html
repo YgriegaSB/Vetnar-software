@@ -1,15 +1,10 @@
 {% extends './home.html' %}
 
-{% block customCSS %} 
-<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='css/clientes.css') }}">
-{% endblock %}
-
 {% block title %} Home {% endblock %}
 
 {% block content %}
 <section class="container accesos">
-    <span class="text-primary fs-4">Inicio: </span>
+    <h4 class="text-primary titulos">Inicio: </h4>
     <div class="direct">
         <a href="/clientes_add" class="btn btn-success direct_access fw-bold">
             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="40" fill="currentColor" class="mx-2 bi bi-people-fill" viewBox="0 0 16 16">
@@ -51,25 +46,25 @@
     <hr>
     <div class="d-flex">
         <section class="w-50 pt-2 border-end border-2 pe-1" id="intro">
-            <h1 class="fs-4">Nuevas actualizaciones en desarrollo para <span class="text-primary">nuestros usuarios!</span></h1>
+            <h4 class="titulos">Nuevas actualizaciones en desarrollo para <span class="titulos">nuestros usuarios!</span></h4>
             <p>
                 <span class="text-primary fs-4">En desarrollo: </span>
                 <ul class="">
-                    <li class="fs-5 updates">Ventas</li>
-                    <li class="fs-5 updates">Hospitalización</li>
-                    <li class="fs-5 updates">Guardería</li>
-                    <li class="fs-5 updates">Análisis de datos</li>
-                    <li class="fs-5 updates">Gestión de jaulas</li>
-                    <li class="fs-5 updates">Manejo de inventario</li>
-                    <li class="fs-5 updates">Gestión de proveedores</li>
-                    <li class="fs-5 updates">Marketing</li>
-                    <li class="fs-5 updates">Cola médica</li>
+                    <li class="updates">Ventas</li>
+                    <li class="updates">Hospitalización</li>
+                    <li class="updates">Guardería</li>
+                    <li class="updates">Análisis de datos</li>
+                    <li class="updates">Gestión de jaulas</li>
+                    <li class="updates">Manejo de inventario</li>
+                    <li class="updates">Gestión de proveedores</li>
+                    <li class="updates">Marketing</li>
+                    <li class="updates">Cola médica</li>
                 </ul>
             </p>
         </section>
-        <section class="w-50 pt-2 ps-2" id="intro">
+        <section class="w-50 ps-2" id="intro">
             <p>
-                <span class="text-primary fs-4">Contactanos por orientación: </span>
+                <h4 class="titulos">Contactanos por orientación: </h4>
                 <ul class="d-flex">
                     <li class="fs-5 updates border-end pe-3">Nicolás Pinochet F.</li>
                     <li class="fs-5 updates ps-3">+569 9669 7572</li>  
