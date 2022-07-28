@@ -154,6 +154,13 @@ footer p {
   list-style: none;
 }
 
+@media (max-width: 1080px) {
+  .direct_access {
+    margin-bottom: 20px;
+    margin-left: 50px;
+  }
+}
+
 @media (max-width: 768px) {
   .direct_access {
     margin-bottom: 20px;
