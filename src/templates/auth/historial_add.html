@@ -17,18 +17,90 @@
     <div>
         <div class="nav-scroller bg-body shadow-sm col-sm">
             <nav class="nav" aria-label="Secondary navigation">
-                <span class="text-primary mt-2 ms-1">Aplicar: </span>
-                <a class="nav-link active" href="/">Consulta</a>
-                <a class="nav-link" href="/">Control</a>
-                <a class="nav-link" href="/">Vacunación</a>
-                <a class="nav-link" href="/">Antiparacitario</a>
-                <a class="nav-link" href="/">Antipulgas</a>
-                <a class="nav-link" href="/">Cirugía</a>
+                <a class="nav-link" href="/historial">Historia clinica</a>
+                <a class="nav-link active" href="/historial_add">Nueva historia</a>
             </nav>
         </div>
     </div>
 </section>
 <section class="content">
-{% block atencion %} {% endblock %}
+    <form action="/create_history" method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/> 
+        <div class="add">
+            <span class="fs-4">Historia clinica</span>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text mt-3">Paciente</span>
+                <input type="text" class="form-control mt-3" placeholder="Nombre del paciente" name="paciente">
+                <span class="input-group-text mt-3">Tutor</span>
+                <input type="text" class="form-control mt-3" name="tutor" placeholder="Nombre del tutor">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Motivo</span>
+                <input type="text" class="form-control" name="motivo">
+            </div>
+            <div class="input-group input-group-sm mb-4">
+                <span class="input-group-text">Fecha de atención</span>
+                <input type="date" class="form-control" name="fecha">
+                <span class="input-group-text">Hora</span>
+                <input type="time" class="form-control" name="hora">
+            </div>
+            <div class="input-group input-group-sm mb-4">
+                <span class="input-group-text">Temperatura</span>
+                <input type="text" class="form-control" name="temperatura" placeholder="0.0">
+                <span class="input-group-text">F. cardiaca</span>
+                <input type="text" class="form-control" name="fc" placeholder="0">
+                <span class="input-group-text">F. respiratoria</span>
+                <input type="text" class="form-control" name="fr" placeholder="0.0">
+            </div>
+            <div class="input-group input-group-sm mb-4">
+                <span class="input-group-text">Peso</span>
+                <input type="text" class="form-control" name="peso" placeholder="0.0">
+                <span class="input-group-text">DHT</span>
+                <input type="text" class="form-control" name="dht" placeholder="0">
+                <span class="input-group-text">TLC</span>
+                <input type="text" class="form-control" name="tlc" placeholder="0.0">
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Anamnesis</span>
+                <textarea type="text" class="form-control campos" name="anamnesis"></textarea>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Hallazgos</span>
+                <textarea type="text" class="form-control campos" name="hallazgos"></textarea>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Diagnostico</span>
+                <textarea type="text" class="form-control campos" name="diagnostico"></textarea>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Exámenes auxiliares requeridos</span>
+                <textarea type="text" class="form-control campos" name="examenes"></textarea>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Tratamiento</span>
+                <textarea type="text" class="form-control campos" name="tratamiento"></textarea>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <span class="input-group-text">Observaciones</span>
+                <textarea type="text" class="form-control campos" name="observaciones"></textarea>
+            </div>
+            <div class="input-group input-group-sm mb-4">
+                <span class="input-group-text">Tipo de atención</span>
+                <select class="form-select" aria-label="Default select example" name="atencion">
+                    <option selected></option>
+                    <option value="Consulta">Consulta</option>
+                    <option value="Control">Control</option>
+                    <option value="Aplicar vacuna">Aplicar vacuna</option>
+                    <option value="Aplicar antiparacitario">Aplicar antiparacitario</option>
+                    <option value="Aplicar antipulgas">Aplicar antipulgas</option>
+                    <option value="Cirugía">Cirugía</option>
+                </select>
+            </div>
+            <div class="input-group input-group-sm mb-3">
+                <a href="/historial" class="btn btn-danger btn-sm w-50">Cancelar</a>
+                <button type="submit" class="btn btn-primary btn-sm w-50">Guardar cambios</button>
+            </div>
+        </div>
+    </form>
 </section>
 {% endblock %}

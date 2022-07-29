@@ -17,56 +17,54 @@
     <div>
         <div class="nav-scroller bg-body shadow-sm col-sm">
             <nav class="nav" aria-label="Secondary navigation">
-                <a class="nav-link" href="/agenda_events">Calendario</a>
-                <a class="nav-link" href="/agenda_list">Listar</a>
-                <a class="nav-link active" href="/agenda_add">Nueva reserva</a>
+                <a class="nav-link" href="/agenda_list">Regresar</a>
             </nav>
         </div>
     </div>
 </section>
 <section class="container-fluid mt-3 mb-5">
-    <form action="/create_event" method="POST">
+    <form action="/update_event/{{reserva.0}}" method="POST">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/> 
         <div class="add">
             <span class="fs-4">Información del cliente</span>
             <div class="input-group input-group-sm mb-3 mt-3">
                 <span class="input-group-text">Servicio</span>
-                <input type="text" class="form-control" name="servicio" placeholder="Servicio">
+                <input type="text" class="form-control" name="servicio" placeholder="Servicio" value="{{reserva.1}}">
             </div>
             <div class="input-group input-group-sm mb-3">
                 <span class="input-group-text">Fecha</span>
-                <input type="date" class="form-control" name="fecha">
+                <input type="date" class="form-control" name="fecha"value="{{reserva.2}}">
                 <span class="input-group-text">Hora</span>
-                <input type="time" class="form-control" name="hora">
+                <input type="time" class="form-control" name="hora" value="{{reserva.3}}">
                 <span class="input-group-text">Tutor</span>
-                <input type="text" class="form-control" name="tutor" placeholder="Nombre">
-                <input type="text" class="form-control" name="apellido" placeholder="ApellidoP">
+                <input type="text" class="form-control" name="tutor" placeholder="Nombre" value="{{reserva.4}}">
+                <input type="text" class="form-control" name="apellido" placeholder="ApellidoP" value="{{reserva.5}}">
             </div>
             <hr>
             <span class="fs-4">Información del contacto</span>
             <div class="input-group input-group-sm mb-3 mt-3">
                 <span class="input-group-text">Email</span>
-                <input type="text" class="form-control" name="email" placeholder="example@gmail.com">
+                <input type="text" class="form-control" name="email" placeholder="example@gmail.com" value="{{reserva.6}}">
                 <span class="input-group-text">Telefono movil</span>
-                <input type="text" class="form-control" name="telefono" placeholder="+569 ---- ----">
+                <input type="text" class="form-control" name="telefono" placeholder="+569 ---- ----" value="{{reserva.7}}">
             </div>
             <hr>
             <span class="fs-4">Información de atención</span>
             <div class="input-group input-group-sm mb-3 mt-3">
                 <span class="input-group-text">Especie</span>
-                <input type="text" class="form-control" name="especie" placeholder="Especie">
+                <input type="text" class="form-control" name="especie" placeholder="Especie" value="{{reserva.8}}">
                 <span class="input-group-text">Paciente</span>
-                <input type="text" class="form-control" name="nombre" placeholder="Nombre mascota">
+                <input type="text" class="form-control" name="nombre" placeholder="Nombre mascota" value="{{reserva.9}}">
                 <span class="input-group-text">Médico</span>
                 <select class="form-select" aria-label="Default select example" name="medico">
-                    <option selected></option>
+                    <option selected value="{{reserva.10}}">{{reserva.10}}</option>
                     <option value="Juan Carlos Rojas">Juan Carlos Rojas</option>
                     <option value="Ignacio Contreras Contreras">Ignacio Contreras Contreras</option>
                     <option value="Francisca Cifuentes Hidalgo">Francisca Cifuentes Hidalgo</option>
                 </select>
             </div>
             <div class="input-group input-group-sm mb-3">
-                <button type="submit" class="btn btn-success btn-sm w-100 boton">Reservar</button>
+                <button type="submit" class="btn btn-success btn-sm w-100 boton">Actualizar</button>
             </div>
         </div>
     </form>

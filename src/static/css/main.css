@@ -243,3 +243,8 @@ footer p {
 .boton {
   margin-top: 20px;
 }
+
+.campos {
+  height: 20px;
+  width: 100%;
+}

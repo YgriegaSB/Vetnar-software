@@ -1,0 +1,92 @@
+{% extends './home.html' %}
+
+{% block title %} Historial clinico {% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for messages in messages %}
+<div class="alert alert-success alert-dismissible" role="alert">
+    <strong>{{messages}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<section class="content">
+    <div>
+        <div class="nav-scroller bg-body shadow-sm col-sm">
+            <nav class="nav" aria-label="Secondary navigation">
+                <a class="nav-link" href="/historial">Regresar</a>
+                <a class="nav-link" href="/info_history/{{historiales.0}}">Historia clinica paciente - <span class="text-success fw-bold">{{historiales.1}}</span></a>
+            </nav>
+        </div>
+    </div>
+</section>
+<section class="content mb-4">
+    <div class="perfil">
+        <span class="input-group-text bg-success fw-bold text-white">Ficha del paciente</span>
+        <div class="input-group input-group-sm mb-3 mt-3">
+            <label class="text-success ">Paciente: &nbsp;</label>
+            <p class="fw-bold">{{historiales.1}}</p>
+        </div>
+        <div class="input-group mb-3">
+            <label class="text-success ">Tutor: &nbsp;</label>
+            <p class="me-5 fw-bold">{{historiales.2}}</p>
+            <label class="ms-5 text-success ">Motivo: &nbsp;</label>
+            <p class="fw-bold">{{historiales.3}}</p>
+        </div>
+        <div class="input-group mb-3">
+            <label class="text-success ">Fecha: &nbsp;</label>
+            <p class=" fw-bold">{{historiales.4}}</p>
+            <label class="ms-5 text-success ">Hora: &nbsp;</label>
+            <p class=" fw-bold">{{historiales.5}}</p>
+        </div>
+        <hr>
+        <div class="input-group input-group-sm mb-3 mt-3">
+            <label class="text-success ">Temperatura: &nbsp;</label>
+            <p class="me-5 fw-bold">{{historiales.5}}</p>
+            <label class="text-success ">Frecuencia cardiaca: &nbsp;</label>
+            <p class="me-5 fw-bold">{{historiales.6}}</p>
+            <label class="text-success ">Frecuencia respiratoria: &nbsp;</label>
+            <p class=" fw-bold">{{historiales.7}}</p>
+        </div>
+        <div class="input-group input-group-sm mb-3 mt-3">
+            <label class="text-success ">Peso: &nbsp;</label>
+            <p class="me-5 fw-bold">{{historiales.8}}</p>
+            <label class="text-success ">DHT: &nbsp;</label>
+            <p class="fw-bold">{{historiales.9}}</p>
+            <label class="ms-5 text-success ">TLC: &nbsp;</label>
+            <p class="fw-bold">{{historiales.10}}</p>
+        </div>
+        <div class="input-group input-group-sm mb-3">
+            <label class="text-success ">Anamnesis: &nbsp;</label>
+            <p class="fw-bold">{{historiales.11}}</p>
+        </div>
+        <div class="input-group input-group-sm mb-3">
+            <label class="text-success ">Hallazgos: &nbsp;</label>
+            <p class="fw-bold">{{historiales.12}}</p>
+        </div>
+        <div class="input-group input-group-sm mb-3">
+            <label class="text-success ">Diagnostico: &nbsp;</label>
+            <p class="fw-bold">{{historiales.13}}</p>
+        </div>
+        <div class="input-group input-group-sm mb-3">
+            <label class="text-success ">Exámenes: &nbsp;</label>
+            <p class="fw-bold">{{historiales.14}}</p>
+        </div>
+        <div class="input-group input-group-sm mb-3">
+            <label class="text-success ">Tratamiento: &nbsp;</label>
+            <p class="fw-bold">{{historiales.15}}</p>
+        </div>
+        <div class="input-group input-group-sm mb-3">
+            <label class="text-success ">Observaciones: &nbsp;</label>
+            <p class="fw-bold">{{historiales.16}}</p>
+        </div>
+        <div class="input-group input-group-sm mb-3">
+            <label class="text-success ">Tipo de atención: &nbsp;</label>
+            <p class="fw-bold">{{historiales.17}}</p>
+        </div>
+    </div>
+</section>
+{% endblock %}

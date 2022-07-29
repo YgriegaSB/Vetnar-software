@@ -1,6 +1,6 @@
 {% extends './home.html' %}
 
-{% block title %} Historial clinico {% endblock %}
+{% block title %} Historial mascotas {% endblock %}
 
 {% block content %}
 {% with messages = get_flashed_messages() %}
@@ -17,59 +17,45 @@
     <div>
         <div class="nav-scroller bg-body shadow-sm col-sm">
             <nav class="nav" aria-label="Secondary navigation">
-                <a class="nav-link" href="/mascotas">Regresar</a>
-                <a class="nav-link active" href="/perfil_pet/{{mascota.0}}">Perfil</a>
-                <a class="nav-link" href="/edit_pet/{{mascota.0}}">Editar</a>
-                <a class="nav-link" href="/historial/{{mascota.0}}">Historial clinico</a>
+                <a class="nav-link active" href="/historial">Historia clinica</a>
+                <a class="nav-link" href="/historial_add">Nueva historia</a>
             </nav>
         </div>
     </div>
 </section>
 <section class="container-fluid mt-3">
-    <table id="tabla-pets" class="table table-striped">
-        <thead>
-        <tr>
-            <td>Codigo</td>
-            <td>Dueño</td>
-            <td>Paciente</td>
-            <td>Nacimiento</td>
-            <td>MicroChip</td>
-            <td>Especie</td>
-            <td>Notas</td>
-            <td>Acción</td>
-        </tr>
-        </thead>
-        <tbody>
-          <!-- for para listar mascotas -->
-            {% for mascota in mascotas %}
-            <tr>
-                <td>{{ mascota.0 }}</td>
-                <td>{{ mascota.1 }}</td>
-                <td>{{ mascota.2 }}</td>
-                <td>{{ mascota.3 }}</td>
-                <td>{{ mascota.4 }}</td>
-                <td>{{ mascota.5 }}</td>
-                <td>{{ mascota.6 }}</td>
-                <td>
-                  <a class="px-1 text-success" href="/edit_pet/{{mascota.0}}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
-                      <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
-                    </svg>
-                  </a>
-                  <a class="px-1 text-danger"  href="/delete_pet/{{mascota.0}}">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                      <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                    </svg>
-                  </a>
-                  <a class="px-1 text-warning" href="/perfil_pet/{{mascota.0}}"> <!-- Agregar info de cliente -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
-                      <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-                    </svg>
-                  </a>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+  <table id="tabla-servicios" class="table table-striped">
+    <thead>
+    <tr>
+        <td>Codigo</td>
+        <td>Paciente</td>
+        <td>Tutor</td>
+        <td>Fecha</td>
+        <td>Hora</td>
+        <td>Motivo</td>
+        <td>Acción</td>
+    </tr>
+    </thead>
+  <tbody>
+    <!-- for para listar clientes -->
+      {% for historial in historiales %}
+      <tr>
+          <td>{{ historial.0 }}</td>
+          <td>{{ historial.1 }}</td>
+          <td>{{ historial.2 }}</td>
+          <td>{{ historial.3 }}</td>
+          <td>{{ historial.4 }}</td>
+          <td>{{ historial.5 }}</td>
+          <td class="justify-content-center">
+            <a class="px-1 text-warning" href="/info_history/{{historial.0}}"> <!-- Agregar info de cliente -->
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle-fill" viewBox="0 0 16 16">
+                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+              </svg>
+            </a>
+          </td>
+      </tr>
+      {% endfor %}
+  </tbody>
+  </table>
 </section>
 {% endblock %}

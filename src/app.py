@@ -15,13 +15,6 @@ from models.entities.User import User
 
 app = Flask(__name__)
 
-events = [
-    {
-      'todo' : 'Cirugia princesa',
-      'date' : '28-07-2022',
-    },
-]
-
 csrf = CSRFProtect()
 db = MySQL(app)
 login_manager_app = LoginManager(app)
@@ -297,13 +290,55 @@ def delete_pet(id_mascota):
 @app.route('/historial')
 @login_required
 def historial():
-    return render_template('auth/historial.html')
+    cursor = db.connection.cursor()
+    cursor.execute('SELECT id_historial, paciente, tutor, fecha, hora, motivo FROM historiales')
+    data = cursor.fetchall()
+    return render_template('auth/historial.html', historiales = data)
 
 # Redirect add historial
 @app.route('/historial_add')
 @login_required
 def historial_add():
     return render_template('auth/historial_add.html')
+
+@app.route('/create_history', methods=['GET','POST'])
+@login_required
+def create_history():
+    if request.method == 'POST':
+        paciente = request.form['paciente']
+        tutor = request.form['tutor']
+        fecha = request.form['fecha']
+        hora = request.form['hora']
+        motivo = request.form['motivo']
+        temp = request.form['temperatura']
+        fc = request.form['fc']
+        fr = request.form['fr']
+        peso = request.form['peso']
+        dht = request.form['dht']
+        tlc = request.form['tlc']
+        anamnesis = request.form['anamnesis']
+        hallazgos = request.form['hallazgos']
+        diagnostico = request.form['diagnostico']
+        examenes = request.form['examenes']
+        tratamiento = request.form['tratamiento']
+        observaciones = request.form['observaciones']
+        atencion = request.form['atencion']
+        cursor = db.connection.cursor()
+        cursor.execute('INSERT INTO historiales (paciente, tutor, fecha, hora, motivo, temperatura, frecuencia_card, frecuencia_res, peso, DHT, TLC, anamnesis, hallazgos, diagnostico, examenes, tratamiento, observaciones, atencion) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (paciente, tutor, fecha, hora, motivo, temp, fc, fr, peso, dht, tlc, anamnesis, hallazgos, diagnostico, examenes, tratamiento, observaciones, atencion))
+        # commit sql sentence
+        db.connection.commit()
+        # message
+        flash('Historial agregado') 
+        return redirect(url_for('historial'))
+
+@app.route('/info_history/<id_historial>')
+@login_required
+def info_history(id_historial):
+    cursor = db.connection.cursor()
+    cursor.execute('SELECT * FROM historiales WHERE id_historial = {}'. format(id_historial))
+    data = cursor.fetchall()
+    return render_template('auth/historial_info.html', historiales = data[0])
+
 
 ################################################# Vistas servicios  ###########################################################
 @app.route('/servicios')
@@ -410,8 +445,8 @@ def update_expert(id_profesional):
         apellidoP = request.form['apellidoP']
         apellidoM = request.form['apellidoM']
         especialidad = request.form['especialidad']
-        cur = db.connection.cursor()
-        cur.execute( """
+        cursor = db.connection.cursor()
+        cursor.execute( """
         UPDATE profesionales
         SET nombre = %s,
             apellidoP = %s,
@@ -471,6 +506,54 @@ def create_event():
         # message
         flash('Reserva realizada') 
         return redirect(url_for('agenda_list'))
+        
+# Editar
+@app.route('/edit_event/<id_reserva>')
+def get_event(id_reserva):
+    cursor = db.connection.cursor()
+    cursor.execute('SELECT * FROM reservas WHERE id_reserva = {}'. format(id_reserva))
+    data = cursor.fetchall()
+    return render_template('auth/agenda_edit.html', reserva = data[0])
+# upgrade
+@app.route('/update_event/<id_reserva>', methods = ['POST'])
+def update_event(id_reserva):
+    if request.method == 'POST':
+        servicio = request.form['servicio']
+        fecha = request.form['fecha']
+        hora = request.form['hora']
+        tutor = request.form['tutor']
+        apellido = request.form['apellido']
+        email = request.form['email']
+        telefono = request.form['telefono']
+        especie = request.form['especie']
+        nombre = request.form['nombre']
+        medico = request.form['medico']
+        cursor = db.connection.cursor()
+        cursor.execute( """
+        UPDATE reservas
+        SET servicio = %s, 
+            fecha = %s, 
+            hora = %s, 
+            nombrecl = %s, 
+            apellidoP = %s, 
+            email = %s, 
+            telefono = %s, 
+            especie = %s, 
+            nombre = %s, 
+            medico = %s
+        WHERE id_reserva = %s
+        """, (servicio, fecha, hora, tutor, apellido, email, telefono, especie, nombre, medico, id_reserva))
+        db.connection.commit()
+        flash('Reserva actualizada correctamente')
+        return redirect(url_for('agenda_list'))
+
+@app.route('/cancel_event/<string:id_reserva>')
+def cancel_event(id_reserva):
+    cur = db.connection.cursor()
+    cur.execute('DELETE FROM reservas WHERE id_reserva = {}'. format(id_reserva))
+    db.connection.commit()
+    flash('Reserva cancelada')    
+    return redirect(url_for('agenda_list'))
         
 ################################################# Vistas settings     ###########################################################
 @app.route('/settings')
