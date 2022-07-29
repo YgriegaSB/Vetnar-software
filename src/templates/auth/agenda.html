@@ -1,0 +1,21 @@
+{% extends './home.html' %}
+
+{% block title %} Agenda {% endblock %}
+
+{% block content %}
+<section class="content">
+    <div>
+        <div class="nav-scroller bg-body shadow-sm col-sm">
+            <nav class="nav" aria-label="Secondary navigation">
+                <a class="nav-link active" href="/agenda_events">Calendario</a>
+                <a class="nav-link" href="/agenda_list">Listar</a>
+                <a class="nav-link" href="/agenda_add">Nueva reserva</a>
+            </nav>
+        </div>
+    </div>
+</section>
+<section class="container-fluid mt-3 mb-5">
+    <div id="calendar">
+    </div>
+</section>
+{% endblock %}

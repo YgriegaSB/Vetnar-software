@@ -1,0 +1,69 @@
+{% extends './home.html' %}
+
+{% block title %} Agenda | Listar {% endblock %}
+
+{% block content %} 
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for messages in messages %}
+<div class="alert alert-success alert-dismissible" role="alert">
+    <strong>{{messages}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+<section class="content">
+    <div>
+        <div class="nav-scroller bg-body shadow-sm col-sm">
+            <nav class="nav" aria-label="Secondary navigation">
+                <a class="nav-link" href="/agenda_events">Calendario</a>
+                <a class="nav-link active" href="/agenda_list">Listar</a>
+                <a class="nav-link" href="/agenda_add">Nueva reserva</a>
+            </nav>
+        </div>
+    </div>
+</section>
+<section class="container-fluid mt-3 mb-5">
+    <table id="tabla-clientes" class="table table-striped">
+        <thead>
+        <tr>
+            <td>Codigo</td>
+            <td>Fecha</td>
+            <td>Hora</td>
+            <td>Tutor</td>
+            <td>Telefono</td>
+            <td>Paciente</td>
+            <td>Médico</td>
+            <td>Acción</td>
+        </tr>
+        </thead>
+        <tbody>
+          <!-- for para listar clientes -->
+            {% for reserva in reservas %}
+            <tr>
+                <td>{{ reserva.0 }}</td>
+                <td>{{ reserva.1 }}</td>
+                <td>{{ reserva.2 }}</td>
+                <td>{{ reserva.3 }}</td>
+                <td>{{ reserva.4 }}</td>
+                <td>{{ reserva.5 }}</td>
+                <td>{{ reserva.6 }}</td>
+                <td>
+                  <a class="px-1 text-success" href="/edit_event/{{reserva.0}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen-fill" viewBox="0 0 16 16">
+                      <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001z"/>
+                    </svg>
+                  </a>
+                  <a class="px-1 text-danger"  href="/cancel_event/{{reserva.0}}">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle-fill" viewBox="0 0 16 16">
+                      <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293 5.354 4.646z"/>
+                    </svg>
+                  </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+</section>
+{% endblock %}

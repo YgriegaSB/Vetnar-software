@@ -15,6 +15,13 @@ from models.entities.User import User
 
 app = Flask(__name__)
 
+events = [
+    {
+      'todo' : 'Cirugia princesa',
+      'date' : '28-07-2022',
+    },
+]
+
 csrf = CSRFProtect()
 db = MySQL(app)
 login_manager_app = LoginManager(app)
@@ -285,16 +292,19 @@ def delete_pet(id_mascota):
     db.connection.commit()
     flash('Paciente removido satisfactoriamente')    
     return redirect(url_for('mascotas'))
-######################################################
-@app.route('/mascotas_info')
-@login_required
-def mascotas_info():
-    return render_template('auth/mascotas_info.html')
+###############################################################################################################################
 ################################################# Vistas historial  ###########################################################
-@app.route('/mascotas_history')
+@app.route('/historial')
 @login_required
-def mascotas_history():
-    return render_template('auth/mascotas_history.html')
+def historial():
+    return render_template('auth/historial.html')
+
+# Redirect add historial
+@app.route('/historial_add')
+@login_required
+def historial_add():
+    return render_template('auth/historial_add.html')
+
 ################################################# Vistas servicios  ###########################################################
 @app.route('/servicios')
 @login_required
@@ -420,6 +430,47 @@ def delete_expert(id_profesional):
     db.connection.commit()
     flash('Profesional removido satisfactoriamente')    
     return redirect(url_for('profesionales_add'))
+
+################################################# Agenda ##################################################
+@app.route('/agenda_events')
+@login_required
+def agenda_events():
+    return render_template('auth/agenda.html')
+
+@app.route('/agenda_list')
+@login_required
+def agenda_list():
+    cursor = db.connection.cursor()
+    cursor.execute('SELECT id_reserva, fecha, hora, nombrecl, telefono, nombre, medico FROM reservas')
+    data = cursor.fetchall()
+    return render_template('auth/agenda_list.html', reservas = data)
+
+@app.route('/agenda_add')
+@login_required
+def agenda_add():
+    return render_template('auth/agenda_add.html')
+
+@app.route('/create_event', methods=['GET','POST'])
+@login_required
+def create_event():
+    if request.method == 'POST':
+        servicio = request.form['servicio']
+        fecha = request.form['fecha']
+        hora = request.form['hora']
+        tutor = request.form['tutor']
+        apellido = request.form['apellido']
+        email = request.form['email']
+        telefono = request.form['telefono']
+        especie = request.form['especie']
+        nombre = request.form['nombre']
+        medico = request.form['medico']
+        cursor = db.connection.cursor()
+        cursor.execute('INSERT INTO reservas (servicio, fecha, hora, nombrecl, apellidoP, email, telefono, especie, nombre, medico) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)', (servicio, fecha, hora, tutor, apellido, email, telefono, especie, nombre, medico))
+        # commit sql sentence
+        db.connection.commit()
+        # message
+        flash('Reserva realizada') 
+        return redirect(url_for('agenda_list'))
         
 ################################################# Vistas settings     ###########################################################
 @app.route('/settings')

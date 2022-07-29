@@ -146,7 +146,7 @@ footer p {
   width: 100px;
   height: 100px;
   font-size: 12px;
-  margin-left: 67px;
+  margin-left: 68px;
 }
 
 .updates {
@@ -238,4 +238,8 @@ footer p {
 .table {
   font-size: 14px;
   width: 100%;
+}
+
+.boton {
+  margin-top: 20px;
 }
